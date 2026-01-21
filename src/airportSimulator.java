@@ -1,12 +1,12 @@
-public class airportSimulator {
-    public class AirportSimulator {
+import java.util.*;
 
-    private LandingQueue landingQueue;
-    private QueueFIFO<Flight> takeoffQueue;
+public class airportSimulator {
+    private ColaAterrizaje landingQueue;
+    private ColaDespegue takeoffQueue;
     private int clock;
     private int flightCounter;
 
-    public AirportSimulator(LandingQueue landingQueue, QueueFIFO<Flight> takeoffQueue) {
+    public airportSimulator(ColaAterrizaje landingQueue, ColaDespegue takeoffQueue) {
         this.landingQueue = landingQueue;
         this.takeoffQueue = takeoffQueue;
         this.clock = 0;
@@ -19,14 +19,14 @@ public class airportSimulator {
 
     public void addLanding(boolean emergency) {
         String id = "FL-" + flightCounter++;
-        Flight f = new Flight(id, emergency, clock);
+        Avion f = new Avion(id, emergency, clock);
         landingQueue.add(f);
         System.out.println("✈ Vuelo agregado a ATERRIZAJE: " + f);
     }
 
     public void addTakeoff() {
         String id = "FL-" + flightCounter++;
-        Flight f = new Flight(id, false, clock);
+        Avion f = new Avion(id, false, clock);
         takeoffQueue.enqueue(f);
         System.out.println("🛫 Vuelo agregado a DESPEGUE: " + f);
     }
@@ -41,10 +41,10 @@ public class airportSimulator {
             return;
         }
 
-        Flight f = landingQueue.poll();
+        Avion f = landingQueue.poll();
         System.out.println("⬇ ATERRIZANDO: " + f);
 
-        clock += SimConfig.TIME_LAND;
+        clock += ConfigSimulacion.TIEMPO_ATERRIZAJE;
 
         // Equipaje (usa la pila)
         BaggageProcessor processor = new BaggageProcessor();
@@ -59,10 +59,10 @@ public class airportSimulator {
             return;
         }
 
-        Flight f = takeoffQueue.dequeue();
+        Avion f = takeoffQueue.dequeue();
         System.out.println("⬆ DESPEGANDO: " + f);
 
-        clock += SimConfig.TIME_TAKEOFF;
+        clock += ConfigSimulacion.TIEMPO_DESPEGUE;
         System.out.println("✔ Despegue completado. Tiempo actual: " + clock);
     }
 
@@ -77,7 +77,4 @@ public class airportSimulator {
         System.out.println("Despegues en cola: " + takeoffQueue.size());
         System.out.println("-----------------------------\n");
     }
-}
-
-
 }

@@ -1,11 +1,3 @@
-public interface Stack<T> {
-    void push(T value);
-    T pop();
-    T peek();
-    boolean isEmpty();
-    int size();
-}
-
 public class ArrayStack<T> implements Stack<T> {
     private static final int DEFAULT_CAPACITY = 10;
 
