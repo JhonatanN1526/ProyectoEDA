@@ -1,3 +1,5 @@
+import java.util.ArrayDeque;
+
 public class BaggageProcessor {
 
     public int processBaggage(Avion avion, int clock) {
@@ -7,7 +9,7 @@ public class BaggageProcessor {
 
         int n = ConfigSimulacion.CANTIDAD_EQUIPAJE;
 
-        Stack<String> stack = new ArrayStack<>(n);
+        ArrayDeque<String> stack = new ArrayDeque<>();
 
         for (int i = 1; i <= n; i++) {
             String label = "Avion " + avion.getId() + " contenedor #" + i;
