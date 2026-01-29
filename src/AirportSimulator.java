@@ -24,13 +24,6 @@ public class AirportSimulator {
         System.out.println("Agregado a aterrizaje: " + f);
     }
 
-    public void addTakeoff() {
-        String id = "FL-" + flightCounter++;
-        Avion f = new Avion(id, false, clock);
-        takeoffQueue.enqueue(f);
-        System.out.println("Agregado a despegue: " + f);
-    }
-
     public void processNextLanding() {
         if (landingQueue.isEmpty()) {
             System.out.println("No hay vuelos esperando aterrizaje.");
@@ -43,7 +36,11 @@ public class AirportSimulator {
         clock += ConfigSimulacion.TIEMPO_ATERRIZAJE;
         clock = baggageProcessor.processBaggage(f, clock);
 
+        // Pasa el mismo avion a la cola de despegue
+        takeoffQueue.enqueue(f);
+
         System.out.println("Aterrizaje completado. Tiempo actual: " + clock);
+        System.out.println("Avion agregado a cola de despegue: " + f.getId());
     }
 
     public void processNextTakeoff() {

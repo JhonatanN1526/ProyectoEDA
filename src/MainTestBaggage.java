@@ -19,10 +19,9 @@ public class MainTestBaggage {
                         boolean emergency = readYesNo(sc, "Es emergencia? (s/n): ");
                         sim.addLanding(emergency);
                     }
-                    case 2 -> sim.addTakeoff();
-                    case 3 -> sim.processNextLanding();
-                    case 4 -> sim.processNextTakeoff();
-                    case 5 -> sim.showStatus();
+                    case 2 -> sim.processNextLanding();
+                    case 3 -> sim.processNextTakeoff();
+                    case 4 -> sim.showStatus();
                     case 0 -> running = false;
                     default -> System.out.println("Opcion invalida.");
                 }
@@ -38,10 +37,9 @@ public class MainTestBaggage {
     private static void printMenu() {
         System.out.println("----- Menu -----");
         System.out.println("1) Registrar aterrizaje");
-        System.out.println("2) Registrar despegue");
-        System.out.println("3) Procesar siguiente aterrizaje (50 equipajes)");
-        System.out.println("4) Procesar siguiente despegue");
-        System.out.println("5) Ver estado");
+        System.out.println("2) Procesar siguiente aterrizaje (50 equipajes)");
+        System.out.println("3) Procesar siguiente despegue");
+        System.out.println("4) Ver estado");
         System.out.println("0) Salir");
     }
 
